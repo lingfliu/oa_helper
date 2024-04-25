@@ -9,6 +9,11 @@ data = xlrd.open_workbook(file)
 
 for tab in data.sheets():
     print(tab.name)
-    
+    nrows = tab.nrows
+
+    for r in range(nrows):
+        entries = tab.row(r)
+
+
 
 
