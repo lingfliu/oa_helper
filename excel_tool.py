@@ -3,12 +3,12 @@
 import xlrd
 import xlwt
 import numpy as np
-from str_tools import is_number
+from str_tools import is_number, is_empty
 
 dir = './'
 
-file_score = '17-20培养目标达成度-直接评价.xlsx'
-file_weight = '17-20培养目标达成度-直接评价权重.xlsx'
+file_score = '17-20培养目标达成度-直接评价-v2.xlsx'
+file_weight = '17-20培养目标达成度-直接评价权重-v2.xlsx'
 
 data_weight = xlrd.open_workbook(dir + file_weight)
 
@@ -18,7 +18,7 @@ weights = []
 pmajor = []
 pmin = []
 for tab in data_weight.sheets():
-    # print(tab.name)
+    print(tab.name)
     ncols = tab.ncols
     nrows = tab.nrows
 
@@ -34,22 +34,23 @@ for tab in data_weight.sheets():
     for ic in range(len(p2)):
         for ir in range(nrows-2):
             w = tab.row(ir+2)[ic+1].value
-            if w == 'H':
-                weight[ic,ir] = 0.2
-            elif w == 'M':
-                weight[ic,ir] = 0.1
+            if is_empty(w):
+                w = 0
             else:
-                weight[ic,ir] = 0
+                vs = w.split('/')
+                if len(vs) > 1:
+                    weight[ic,ir] = float(vs[1])
+                    # print('weight=', weight[ic,ir])
 
     # check the sum of each column
-    # print(np.sum(weight,1))
+    print('权重核算', tab.name,np.sum(weight,1))
 
     weights.append(weight)
 
 data_score = xlrd.open_workbook(dir + file_score)
 scores = []
 for tab in data_score.sheets():
-    print(tab.name)
+    # print(tab.name)
     ncols = tab.ncols
     nrows = tab.nrows
 
@@ -76,6 +77,11 @@ for idx in range(len(weights)):
     score = scores[idx]
     score_avg_weighted = np.average(weight*score,1)
 
-    print('达成度平均分', tab_names[idx])
+    weight_sum = np.sum(weight,1)
+    print('权重和', tab_names[idx])
     for i in range(len(score_avg_weighted)):
-        print(pmajor[i], pmin[i], score_avg_weighted[i])
+        print(pmajor[i], pmin[i], weight_sum[i])
+    #
+    # print('达成度平均分', tab_names[idx])
+    # for i in range(len(score_avg_weighted)):
+    #     print(pmajor[i], pmin[i], score_avg_weighted[i])

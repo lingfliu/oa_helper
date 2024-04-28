@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b0aad4a-98cd-4e13-b6fd-dfa4ebd48d18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/str_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/oa_helper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oa_helper.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/17-20培养目标达成度-直接评价-v2.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/17-20培养目标达成度-直接评价权重-v2.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/17-20培养目标达成度-直接评价.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/17-20培养目标达成度-直接评价.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/17-20培养目标达成度-直接评价权重.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/17-20培养目标达成度-直接评价权重.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/excel_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/excel_tool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/str_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/str_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +77,8 @@
       <workItem from="1714059946346" duration="24000" />
       <workItem from="1714059980953" duration="992000" />
       <workItem from="1714216145080" duration="169000" />
-      <workItem from="1714216385164" duration="3737000" />
+      <workItem from="1714216385164" duration="4353000" />
+      <workItem from="1714297328230" duration="6608000" />
     </task>
     <servers />
   </component>
@@ -95,12 +99,15 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="weight" language="Python" />
-        <watch expression="np.sum(weight,1)" language="Python" />
+        <watch expression="tab.row(ir+2)[ic+1]" language="Python" />
+        <watch expression="len(vs)" language="Python" />
+        <watch expression="tab.name" language="Python" />
+        <watch expression="np.max(weight)" language="Python" />
+        <watch expression="tab.row(2)" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/oa_helper$excel_tool.coverage" NAME="excel_tool Coverage Results" MODIFIED="1714229057605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/oa_helper$excel_tool.coverage" NAME="excel_tool Coverage Results" MODIFIED="1714317833264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
