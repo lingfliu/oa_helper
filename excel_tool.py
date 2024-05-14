@@ -7,6 +7,9 @@ from str_tools import is_number, is_empty
 
 dir = './'
 
+
+'''核算权重信息'''
+
 file_score = '17-20培养目标达成度-直接评价-v2.xlsx'
 file_weight = '17-20培养目标达成度-直接评价权重-v2.xlsx'
 

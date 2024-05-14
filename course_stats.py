@@ -6,6 +6,7 @@ import xlwt
 import numpy as np
 from str_tools import is_number, is_empty
 
+'''统计课程任课老师信息'''
 dir = 'D:\\nutshare\\lingfliu\\ecjtu\\2024-本科教学审核评估\\'
 
 file_mission = '17.1-23.2教学任务书.xlsx'
@@ -48,8 +49,8 @@ row_idx = [i+1 for i in range(nrows-1)]
 for row in row_idx:
     # if class name match any of '物联网工程'
     class_name = str(tab.row(row)[class_name_idx].value)
-    if re.match(r'物联网工程', class_name):
-        if not '2016' in class_name:
+    if '物联网' in class_name:
+        if not '2016' in class_name and not '2015' in class_name:
             courses.append({
                 'semester': tab.row(row)[semester_idx].value,
                 'class_name': tab.row(row)[class_name_idx].value,
