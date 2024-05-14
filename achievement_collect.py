@@ -7,7 +7,8 @@ from str_tools import is_number, is_empty
 import os
 
 # get root path of D:
-dir = 'D:\\nutshare\\lingfliu\\ecjtu\\2024-本科教学审核评估\\'
+# dir = 'D:\\nutshare\\lingfliu\\ecjtu\\2024-本科教学审核评估\\'
+dir = 'D:\\nutshare_lingfeng\ecjtu\\2024-本科教学审核评估\\'
 
 
 '''统计达成度评价'''
@@ -123,6 +124,26 @@ for idx in range(len(weights)):
 
     score_avg_weighteds.append(score_avg_weighted)
 
+# load indirect score
+file_score_indirect_student = '毕业生间接评价.xls'
+data_score_indirect_student = xlrd.open_workbook(dir + file_score_indirect_student)
+sheet = data_score_indirect_student.sheets()[0]
+scores_indirect_student = np.zeros((4, len(pmajor))) # 2020, 2021, 2022, 2023
+for ir in range(sheet.nrows):
+    for ic in range(1,sheet.ncols):
+        scores_indirect_student[ir, ic-1] = sheet.row(ir)[ic].value
+
+file_score_indirect_enterprise = '企业间接评价.xls'
+data_score_indirect_enterprise = xlrd.open_workbook(dir + file_score_indirect_enterprise)
+sheet = data_score_indirect_enterprise.sheets()[0]
+scores_indirect_enterprise = np.zeros((1,len(pmajor)))
+for ic in range(sheet.ncols):
+    scores_indirect_enterprise[0, ic] = sheet.row(0)[ic].value
+
+scores_indirect = np.zeros((4, len(pmajor)))
+for i in range(4):
+    scores_indirect[i] = scores_indirect_student[i] * 0.5 + scores_indirect_enterprise[0] * 0.5
+
 # write to excel
 years = ['2017', '2018', '2019', '2020']
 result_output = xlwt.Workbook(encoding='utf-8')
@@ -171,12 +192,13 @@ for i, y in enumerate(years):
         sheet.write(cnt+1, 2, '间接评价')
         sheet.write(cnt+1, 3, '问卷调查')
         sheet.write(cnt+1, 4, '1')
-        sheet.write(cnt+1, 5, '80')
-        sheet.write(cnt+1, 6, '80')
-        # 最终评价
-        sheet.write_merge(istart_min+1, cnt+1, 7, 7, '{:.4f}'.format((avg+80)/2))
 
-        avg = (avg + 80) / 2
+        sheet.write(cnt+1, 5, scores_indirect[3-i, idx])
+        sheet.write(cnt+1, 6, scores_indirect[3-i, idx])
+        # 最终评价
+        sheet.write_merge(istart_min+1, cnt+1, 7, 7, '{:.4f}'.format((avg+scores_indirect[3-i, idx])/2))
+
+        avg = (avg + scores_indirect[3-i, idx]) / 2
         avgs.append(avg)
 
         cnt += 1
@@ -213,7 +235,7 @@ for i, y in enumerate(years):
 
         istart_min = cnt
 
-result_output.save(dir + '直接评价表.xls')
+result_output.save(dir + '总评价表.xls')
 print('done')
 
 
